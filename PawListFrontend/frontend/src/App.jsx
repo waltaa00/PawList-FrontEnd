@@ -6,7 +6,7 @@ import UpdateDogPage from './pages/UpdateDog';
 import DeleteDogPage from './pages/DeleteDog';
 import LoginPage from './pages/Login';
 import SignupPage from './pages/Register';
-import Navbar from './components/Navbar';
+import Navbar from './components/NavBar';
 import DogDetails from './pages/DogDetail';
 import { useAuth } from './context/AuthContext';
 import Swal from 'sweetalert2';
