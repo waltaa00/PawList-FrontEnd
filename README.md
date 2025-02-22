@@ -1,5 +1,5 @@
 # PawList Front-end
-PawList is a modern, responsive web application built with React + Vite. It provides a sleek interface for managing dog data (fetched from The Dog API) and performing CRUD operations, along with secure user authentication. The project leverages Material UI for a polished design, SweetAlert2 for user-friendly alerts, and additional libraries for networking, image loading, and more.
+PawList is a modern, responsive web application built with React + Vite. It provides a sleek interface for managing dog data (fetched from The Dog API) and performing CRUD operations, along with secure user authentication. The project leverages Material UI for a polished design, SweetAlert2 for user-friendly alerts, and additional libraries for networking, image loading, and more. You can check the API's link here to see the data https://api.thedogapi.com/v1/breeds
 
 ### Overview
 PawList is designed to provide an engaging and intuitive user experience for dog enthusiasts. Users can browse various dog breeds, view details, upload images, and manage entries—all within a modern dark-themed interface.
