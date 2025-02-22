@@ -66,11 +66,11 @@ const App = () => {
                 />
                 <Route
                     path="/login"
-                    element={!isAuthenticated ? <LoginPage /> : <Navigate to="/login" />}
+                    element={!isAuthenticated ? <LoginPage /> : <Navigate to="/home" />}
                 />
                 <Route
                     path="/register"
-                    element={!isAuthenticated ? <SignupPage /> : <Navigate to="/login" />}
+                    element={!isAuthenticated ? <SignupPage /> : <Navigate to="/home" />}
                 />
                 <Route
                     path="/home"
