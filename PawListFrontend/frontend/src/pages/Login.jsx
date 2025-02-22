@@ -1,17 +1,24 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom'; // Import useNavigate for programmatic navigation
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom'; // For programmatic navigation
 import { Box, Button, Card, Divider, FormControl, FormLabel, TextField, Typography } from '@mui/material';
 import { useAuth } from '../context/AuthContext'; // Use the auth context
-import { login } from '../services/authService'; // Using the login function from the authService
+import { login } from '../services/authService'; // Login function from the authService
 import pawListImage from '../assets/Paw2.svg'; // Image import
-import Swal from "sweetalert2"; // Import deleteDog from your service
+import Swal from "sweetalert2"; // For alerts
 
 const LoginPage = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
-    const navigate = useNavigate(); // For programmatic navigation
-    const { login: authLogin } = useAuth(); // Use the login method from context
+    const navigate = useNavigate();
+    const { login: authLogin, isAuthenticated } = useAuth(); // Assume your auth context now provides isAuthenticated
+
+    // When authentication state changes, navigate to /home
+    useEffect(() => {
+        if (isAuthenticated) {
+            navigate('/home');
+        }
+    }, [isAuthenticated, navigate]);
 
     const handleLogin = async (event) => {
         event.preventDefault(); // Prevent default form submission
@@ -23,25 +30,18 @@ const LoginPage = () => {
                 console.log('Login successful:', response);
                 // Store the token in localStorage
                 localStorage.setItem('authToken', response.token);
-                // Update authentication status
-                authLogin(response.token); // Use auth context to mark user as authenticated
-                // Redirect to the home page after successful login
-                navigate('/home');
-                //window.location.href = '/home';
-                // window.location.reload();
-
+                // Update authentication status in the auth context
+                authLogin(response.token);
+                // No need to call navigate here; the useEffect will handle redirection.
             } else {
                 console.log('Login failed:', response.message);
                 Swal.fire({
                     title: "Oops...",
                     text: "Please check your information!",
                     icon: "error",
-                    background: "#2a2a2a",   // Dark background for the popup
-                    color: "#fff",           // White text for contrast
-                    confirmButtonColor: "#90caf9", // Accent color for the confirm button
-                    customClass: {
-                        popup: 'my-swal-popup' // Optional: use a custom CSS class for further styling
-                    }
+                    background: "#2a2a2a",
+                    color: "#fff",
+                    confirmButtonColor: "#90caf9",
                 });
             }
         } catch (error) {
@@ -50,12 +50,9 @@ const LoginPage = () => {
                 title: "Oops...",
                 text: "Please check your information!",
                 icon: "error",
-                background: "#2a2a2a",   // Dark background for the popup
-                color: "#fff",           // White text for contrast
-                confirmButtonColor: "#90caf9", // Accent color for the confirm button
-                customClass: {
-                    popup: 'my-swal-popup' // Optional: use a custom CSS class for further styling
-                }
+                background: "#2a2a2a",
+                color: "#fff",
+                confirmButtonColor: "#90caf9",
             });
         }
     };
@@ -67,7 +64,7 @@ const LoginPage = () => {
                 justifyContent: 'center',
                 alignItems: 'center',
                 minHeight: '100vh',
-                backgroundColor: '#1f1f1f' // Dark background for the page
+                backgroundColor: '#1f1f1f'
             }}
         >
             <Card
@@ -75,7 +72,7 @@ const LoginPage = () => {
                     p: 3,
                     width: '100%',
                     maxWidth: 400,
-                    backgroundColor: '#2a2a2a', // Dark card background
+                    backgroundColor: '#2a2a2a',
                     borderRadius: 2,
                     boxShadow: 3,
                     marginTop: -25
@@ -96,7 +93,7 @@ const LoginPage = () => {
                     gutterBottom
                     sx={{ color: '#fff', fontWeight: 600 }}
                 >
-                    
+                    {/* Optional: Add a title if needed */}
                 </Typography>
 
                 <Box
@@ -106,10 +103,7 @@ const LoginPage = () => {
                     sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}
                 >
                     <FormControl>
-                        <FormLabel
-                            htmlFor="username"
-                            sx={{ color: '#ccc', marginBottom: 1, marginTop: -2, textAlign: 'left' }}
-                        >
+                        <FormLabel htmlFor="username" sx={{ color: '#ccc', mb: 1, mt: -2, textAlign: 'left' }}>
                             Username
                         </FormLabel>
                         <TextField
@@ -120,30 +114,20 @@ const LoginPage = () => {
                             required
                             fullWidth
                             variant="outlined"
-                            
                             sx={{
                                 '& .MuiOutlinedInput-root': {
                                     color: '#fff',
                                     backgroundColor: '#3a3a3a',
-                                    '& fieldset': {
-                                        borderColor: '#555'
-                                    },
-                                    '&:hover fieldset': {
-                                        borderColor: '#777'
-                                    },
-                                    '&.Mui-focused fieldset': {
-                                        borderColor: '#90caf9' // Accent color on focus
-                                    }
+                                    '& fieldset': { borderColor: '#555' },
+                                    '&:hover fieldset': { borderColor: '#777' },
+                                    '&.Mui-focused fieldset': { borderColor: '#90caf9' }
                                 }
                             }}
                         />
                     </FormControl>
 
                     <FormControl>
-                        <FormLabel
-                            htmlFor="password"
-                            sx={{ color: '#ccc', marginBottom: 1, textAlign: 'left' }}
-                        >
+                        <FormLabel htmlFor="password" sx={{ color: '#ccc', mb: 1, textAlign: 'left' }}>
                             Password
                         </FormLabel>
                         <TextField
@@ -158,15 +142,9 @@ const LoginPage = () => {
                                 '& .MuiOutlinedInput-root': {
                                     color: '#fff',
                                     backgroundColor: '#3a3a3a',
-                                    '& fieldset': {
-                                        borderColor: '#555'
-                                    },
-                                    '&:hover fieldset': {
-                                        borderColor: '#777'
-                                    },
-                                    '&.Mui-focused fieldset': {
-                                        borderColor: '#90caf9'
-                                    }
+                                    '& fieldset': { borderColor: '#555' },
+                                    '&:hover fieldset': { borderColor: '#777' },
+                                    '&.Mui-focused fieldset': { borderColor: '#90caf9' }
                                 }
                             }}
                         />
@@ -182,26 +160,18 @@ const LoginPage = () => {
                         fullWidth
                         sx={{
                             fontWeight: 600,
-                            marginTop: 2,
+                            mt: 2,
                             textTransform: 'none',
-                            backgroundColor: '#90caf9', // Accent button color
+                            backgroundColor: '#90caf9',
                             color: '#000',
-                            '&:hover': {
-                                backgroundColor: '#64b5f6'
-                            }
+                            '&:hover': { backgroundColor: '#64b5f6' }
                         }}
                     >
                         Log In
                     </Button>
                 </Box>
 
-                <Divider
-                    sx={{
-                        margin: '16px 0',
-                        borderColor: '#3a3a3a',
-                        color: '#fff'
-                    }}
-                >
+                <Divider sx={{ my: 2, borderColor: '#3a3a3a', color: '#fff' }}>
                     or
                 </Divider>
 
@@ -210,11 +180,7 @@ const LoginPage = () => {
                         Don't have an account?{' '}
                         <Button
                             onClick={() => navigate('/register')}
-                            sx={{
-                                textTransform: 'none',
-                                fontWeight: 600,
-                                color: '#90caf9'
-                            }}
+                            sx={{ textTransform: 'none', fontWeight: 600, color: '#90caf9' }}
                         >
                             Register here
                         </Button>
