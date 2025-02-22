@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom'; // Import useNavigate for progra
 import { Box, Button, Card, Divider, FormControl, FormLabel, TextField, Typography } from '@mui/material';
 import { useAuth } from '../context/AuthContext'; // Use the auth context
 import { login } from '../services/authService'; // Using the login function from the authService
-import pawListImage from '../assets/paw2.svg'; // Image import
+import pawListImage from '../assets/Paw2.svg'; // Image import
 import Swal from "sweetalert2"; // Import deleteDog from your service
 
 const LoginPage = () => {
