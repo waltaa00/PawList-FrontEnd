@@ -15,24 +15,26 @@ const LoginPage = () => {
 
     // When authentication state changes, navigate to /home
     useEffect(() => {
+        console.log('Auth state changed:', isAuthenticated);
         if (isAuthenticated) {
             navigate('/home');
         }
     }, [isAuthenticated, navigate]);
 
+
     const handleLogin = async (event) => {
         event.preventDefault(); // Prevent default form submission
 
         try {
-            const response = await login({ username, password }); // Use the login function from the service
+            const response = await login({ username, password }); // Call the login service
 
             if (response.success) {
                 console.log('Login successful:', response);
-                // Store the token in localStorage
+                // Store the token in localStorage and update auth context
                 localStorage.setItem('authToken', response.token);
-                // Update authentication status in the auth context
                 authLogin(response.token);
-                // No need to call navigate here; the useEffect will handle redirection.
+                // Immediately redirect to home
+                navigate('/home');
             } else {
                 console.log('Login failed:', response.message);
                 Swal.fire({
@@ -56,6 +58,7 @@ const LoginPage = () => {
             });
         }
     };
+
 
     return (
         <Box

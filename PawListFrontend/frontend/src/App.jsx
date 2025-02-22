@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import HomePage from './pages/Home';
 import AddDogPage from './pages/AddDog';
@@ -12,20 +12,8 @@ import { useAuth } from './context/AuthContext';
 import Swal from 'sweetalert2';
 
 const App = () => {
-    const [isAuthenticated, setIsAuthenticated] = useState(
-        Boolean(localStorage.getItem('authToken'))
-    );
-    const { logout } = useAuth(); // Get the authentication state
-
-    useEffect(() => {
-        const token = localStorage.getItem('authToken');
-        
-        if (token) {
-            setIsAuthenticated(true); // User is authenticated
-        } else {
-            setIsAuthenticated(false);
-        }
-    }, []);
+    // Use the auth context's state directly
+    const { isAuthenticated, logout } = useAuth();
 
     const handleLogout = () => {
         Swal.fire({
@@ -41,8 +29,6 @@ const App = () => {
             cancelButtonText: "Cancel"
         }).then((result) => {
             if (result.isConfirmed) {
-                localStorage.removeItem('authToken');
-                setIsAuthenticated(false);
                 logout();
                 Swal.fire({
                     title: "Logged Out",
@@ -62,7 +48,7 @@ const App = () => {
             <Routes>
                 <Route
                     path="/"
-                    element={isAuthenticated ? <Navigate to="/login" /> : <Navigate to="/login" />}
+                    element={isAuthenticated ? <Navigate to="/home" /> : <Navigate to="/login" />}
                 />
                 <Route
                     path="/login"
