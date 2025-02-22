@@ -7,7 +7,6 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <Folder Include="frontend\" />
       <Folder Include="frontend\public\" />
     </ItemGroup>
 

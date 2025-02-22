@@ -1,8 +1,11 @@
 import axiosInstance, { setAuthHeader } from "./authService";
 import axios from 'axios';
 
-// Base URL for dog-related endpoints in the backend
-const API_URL_DOG = "http://localhost:5004/api/dogs";
+// // Base URL for dog-related endpoints in the backend
+// const API_URL_DOG = "http://localhost:5004/api/dogs";
+// In your authService.js or similar:
+const API_URL_DOG = import.meta.env.VITE_API_URL + "/dogs";
+
 
 // Set the Authorization header
 setAuthHeader();

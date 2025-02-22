@@ -1,7 +1,10 @@
 import axios from "axios";
 
-// Base URL for authentication endpoints in the backend
-const API_URL_AUTH = "http://localhost:5004/api/auth";
+// // Base URL for authentication endpoints in the backend
+// const API_URL_AUTH = "http://localhost:5004/api/auth";
+// In your authService.js or similar:
+const API_URL_AUTH = import.meta.env.VITE_API_URL + "/auth";
+
 
 // Create an Axios instance with the base URL
 const axiosInstance = axios.create({
