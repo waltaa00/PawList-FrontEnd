@@ -26,8 +26,9 @@ const LoginPage = () => {
                 // Update authentication status
                 authLogin(response.token); // Use auth context to mark user as authenticated
                 // Redirect to the home page after successful login
-                navigate('/home'); 
-                window.location.reload();
+                navigate('/home');
+                //window.location.href = '/home';
+                // window.location.reload();
 
             } else {
                 console.log('Login failed:', response.message);
