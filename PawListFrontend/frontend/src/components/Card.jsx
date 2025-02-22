@@ -1,42 +1,55 @@
+import * as React from 'react';
+import Card from '@mui/material/Card';
+import CardActions from '@mui/material/CardActions';
+import CardContent from '@mui/material/CardContent';
+import CardMedia from '@mui/material/CardMedia';
+import Button from '@mui/material/Button';
+import Typography from '@mui/material/Typography';
+import { useNavigate } from 'react-router-dom';  // For navigation to dog details
 
-import React from "react";
-import { Link } from "react-router-dom";
+const DogCard = ({ id, breed, imageUrl, showButton = true, buttonText = 'View Details' }) => {
+    const navigate = useNavigate();
 
-// Inline styles for the card
-const cardStyle = {
-    width: "200px",
-    borderRadius: "10px",
-    overflow: "hidden",
-    boxShadow: "0 2px 4px rgba(0,0,0,0.1)",
-    margin: "10px",
-    textDecoration: "none",
-    color: "inherit",
-};
-
-const imageStyle = {
-    width: "100%",
-    height: "200px",
-    objectFit: "cover",
-};
-
-const contentStyle = {
-    padding: "10px",
-    textAlign: "center",
-};
-
-/**
- * DogCard component displays the dog's image and breed.
- * @param {Object} props - Contains the dog object.
- */
-const Card = ({ dog }) => {
     return (
-        <div style={{ padding: "10px", border: "1px solid #ddd", margin: "10px", borderRadius: "8px" }}>
-            <img src={dog.imageUrl} alt={dog.name} style={{ width: "200px", height: "200px", borderRadius: "8px" }} />
-            <h3>{dog.name}</h3>
-            <p>{dog.breed}</p>
-            <p>{dog.description}</p>
-        </div>
+        <Card
+            sx={{
+                maxWidth: 345,
+                marginBottom: '16px',
+                backgroundColor: '#1f1f1f;', /* Dark gray */
+                color: '#fff',              /* White text for contrast */
+                cursor: 'pointer',
+                transition: 'transform 0.3s ease', // Smooth transition for zoom
+                '&:hover': {
+                    transform: 'scale(1.05)', // Scale up by 5% on hover
+                }
+            }}
+        >
+            <CardMedia
+                sx={{
+                    height: 220,
+                    objectFit: 'contain', // Ensures image fits within the card without cropping
+                    objectPosition: 'center', // Centers the image
+                }}
+                image={imageUrl || 'https://via.placeholder.com/150'}
+                title={breed}
+            />
+            <CardContent>
+                <Typography gutterBottom variant="subtitle1" component="div" fontFamily="Poppins" marginBottom={-2} textAlign={'left'}>
+                    {breed}
+                </Typography>
+            </CardContent>
+            <CardActions>
+                {showButton && (
+                    <Button sx={{color: '#90caf9'}}
+                        size="medium"
+                        onClick={() => navigate(`/dog-details/${id}`)}  // Navigate to dog details
+                    >
+                        VIEW DETAILS
+                    </Button>
+                )}
+            </CardActions>
+        </Card>
     );
 };
 
-export default Card;
+export default DogCard;
