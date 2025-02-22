@@ -4,7 +4,7 @@ import axios from 'axios';
 // // Base URL for dog-related endpoints in the backend
 // const API_URL_DOG = "http://localhost:5004/api/dogs";
 // In your authService.js or similar:
-const API_URL_DOG = "http://pawlist.azurewebsites.net/api/dogs";
+const API_URL_DOG = "https://pawlist.azurewebsites.net/api/dogs";
 
 
 // Set the Authorization header

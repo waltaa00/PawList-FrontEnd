@@ -8,7 +8,7 @@ const API_URL_AUTH = "https://pawlist.azurewebsites.net/api/auth";
 
 // Create an Axios instance with the base URL
 const axiosInstance = axios.create({
-    baseURL: "https://pawlist.azurewebsites.net/api",
+    baseURL: API_URL_AUTH,
     headers: {
         "Content-Type": "application/json",
     },
