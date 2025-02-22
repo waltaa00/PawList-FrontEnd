@@ -1,0 +1,96 @@
+/* Make the entire page have a uniform dark background */
+html, body {
+  margin: 0;
+  padding: 0;
+  background-color: #1f1f1f; /* Dark gray */
+  color: #fff;              /* White text for contrast */
+  font-family: 'Poppins', sans-serif;
+}
+
+/* #root is where your React app lives. 
+   Center content if desired, but remove the strong background color. */
+#root {
+  margin: 0 auto;
+  min-height: 100vh;
+  padding: 2rem;
+  text-align: center;
+}
+
+/* Headings with a modern, minimal style */
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  margin: 1rem 0;
+}
+
+/* Paragraphs, buttons, inputs, etc. can be styled for minimalism */
+p, button, input, textarea {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 300;
+  color: #fff;
+}
+
+/* For a subtle hover effect on clickable elements */
+button:hover, a:hover {
+  opacity: 0.9;
+  transition: opacity 0.2s ease-in-out;
+}
+
+/* Example of a subtle card style if you use Card components or .card classes */
+.card {
+  background-color: #2a2a2a;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.4);
+  padding: 1rem;
+  margin: 1rem;
+}
+
+/* Example for a more subtle navbar */
+.navbar {
+  background-color: #2a2a2a;
+  padding: 0.5rem 1rem;
+  display: flex;
+  justify-content: space-between;
+}
+.navbar a, .navbar button {
+  color: #fff;
+  font-weight: 500;
+  text-decoration: none;
+}
+
+
+.logo {
+  height: 6em;
+  padding: 1.5em;
+  will-change: filter;
+  transition: filter 300ms;
+}
+.logo:hover {
+  filter: drop-shadow(0 0 2em #646cffaa);
+}
+.logo.react:hover {
+  filter: drop-shadow(0 0 2em #61dafbaa);
+}
+
+@keyframes logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  a:nth-of-type(2) .logo {
+    animation: logo-spin infinite 20s linear;
+  }
+}
+
+.card {
+  padding: 2em;
+}
+
+.read-the-docs {
+  color: #888;
+}
