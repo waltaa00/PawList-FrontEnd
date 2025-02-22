@@ -15,20 +15,19 @@ const DogCard = ({ id, breed, imageUrl, showButton = true, buttonText = 'View De
             sx={{
                 maxWidth: 345,
                 marginBottom: '16px',
-                backgroundColor: '#1f1f1f', // Removed extra semicolon
-                color: '#fff',              // White text for contrast
+                backgroundColor: '#1f1f1f;', /* Dark gray */
+                color: '#fff',              /* White text for contrast */
                 cursor: 'pointer',
-                transition: 'transform 0.3s ease',
+                transition: 'transform 0.3s ease', // Smooth transition for zoom
                 '&:hover': {
-                    transform: 'scale(1.05)',
+                    transform: 'scale(1.05)', // Scale up by 5% on hover
                 }
             }}
         >
             <CardMedia
-                component="img" // Forces an <img> tag, which is ideal for image display
                 sx={{
                     height: 220,
-                    objectFit: 'contain', // Ensure the entire image is visible
+                    objectFit: 'contain', // Ensures image fits within the card without cropping
                     objectPosition: 'center', // Centers the image
                 }}
                 image={imageUrl || 'https://via.placeholder.com/150'}
@@ -36,24 +35,17 @@ const DogCard = ({ id, breed, imageUrl, showButton = true, buttonText = 'View De
                 title={breed}
             />
             <CardContent>
-                <Typography
-                    gutterBottom
-                    variant="subtitle1"
-                    component="div"
-                    fontFamily="Poppins"
-                    sx={{ mb: -2, textAlign: 'left' }}
-                >
+                <Typography gutterBottom variant="subtitle1" component="div" fontFamily="Poppins" marginBottom={-2} textAlign={'left'}>
                     {breed}
                 </Typography>
             </CardContent>
             <CardActions>
                 {showButton && (
-                    <Button
-                        sx={{ color: '#90caf9' }}
+                    <Button sx={{color: '#90caf9'}}
                         size="medium"
-                        onClick={() => navigate(`/dog-details/${id}`)}
+                        onClick={() => navigate(`/dog-details/${id}`)}  // Navigate to dog details
                     >
-                        {buttonText.toUpperCase()}
+                        VIEW DETAILS
                     </Button>
                 )}
             </CardActions>
